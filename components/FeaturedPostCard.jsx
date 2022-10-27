@@ -1,28 +1,44 @@
-import React from 'react';
-import moment from 'moment';
-import Image from 'next/image';
-import Link from 'next/link';
+/* eslint-disable quotes */
+import React from "react";
+import moment from "moment";
+import Link from "next/link";
+
+// eslint-disable-next-line no-unused-vars
+import { grpahCMSImageLoader } from "../util";
 
 const FeaturedPostCard = ({ post }) => (
-  <div className="relative h-72">
-    <div className="absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72" style={{ backgroundImage: `url('${post.featuredImage.url}')` }} />
-    <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-full h-72" />
-    <div className="flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full">
-      <p className="text-white mb-4 text-shadow font-semibold text-xs">{moment(post.createdAt).format('MMM DD, YYYY')}</p>
-      <p className="text-white mb-4 text-shadow font-semibold text-2xl text-center">{post.title}</p>
-      <div className="flex items-center absolute bottom-5 w-full justify-center">
-        <Image
-          unoptimized
-          alt={post.author.name}
-          height="30px"
-          width="30px"
-          className="align-middle drop-shadow-lg rounded-full"
-          src={post.author.photo.url}
-        />
-        <p className="inline align-middle text-white text-shadow ml-2 font-medium">{post.author.name}</p>
+  <div className="flex flex-col overflow-hidden rounded-lg shadow-xl lg:flex-row">
+    <div className="flex-shrink-0">
+      <img
+        src={post.featuredImage.url}
+        alt=""
+        className="h-48 w-full object-cover lg:h-96 lg:max-w-3xl"
+      />
+    </div>
+    <div className="flex flex-1 flex-col justify-between bg-white p-6">
+      <div className="flex-1">
+        <h1 className="p-1 transition duration-700 text-left text-2xl font-black mb-8 cursor-pointer hover:text-violet-600">
+          <Link href={`/post/${post.slug}`}>{post.title}</Link>
+          <p className="mt-3 text-base font-semibold text-gray-500">
+            {post.excerpt}
+          </p>
+        </h1>
+      </div>
+      <div className="flex items-center justify-between mb-4 lg:mb-0 w-full lg:w-auto mr-8 items-center">
+        <div className="text-center">
+          <Link href={`/post/${post.slug}`}>
+            <span className="transition duration-500 ease transform hover:-translate-y-1 inline-block bg-blue-700 text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">
+              Read Now
+            </span>
+          </Link>
+        </div>
+        <div className="font-medium text-gray-700">
+          <span className="align-middle">
+            {moment(post.createdAt).format("MMM DD, YYYY")}
+          </span>
+        </div>
       </div>
     </div>
-    <Link href={`/post/${post.slug}`}><span className="cursor-pointer absolute w-full h-full" /></Link>
   </div>
 );
 

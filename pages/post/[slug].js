@@ -1,9 +1,16 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+/* eslint-disable quotes */
+import React from "react";
+import { useRouter } from "next/router";
 
-import { PostDetail, Categories, PostWidget, Author, Comments, CommentsForm, Loader } from '../../components';
-import { getPosts, getPostDetails } from '../../services';
-import { AdjacentPosts } from '../../sections';
+import {
+  PostDetail,
+  Author,
+  Comments,
+  CommentsForm,
+  Loader,
+} from "../../components";
+import { getPosts, getPostDetails } from "../../services";
+import { AdjacentPosts } from "../../sections";
 
 const PostDetails = ({ post }) => {
   const router = useRouter();
@@ -14,21 +21,14 @@ const PostDetails = ({ post }) => {
 
   return (
     <>
-      <div className="container mx-auto px-10 mb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="col-span-1 lg:col-span-8">
-            <PostDetail post={post} />
-            <Author author={post.author} />
-            <AdjacentPosts slug={post.slug} createdAt={post.createdAt} />
-            <CommentsForm slug={post.slug} />
-            <Comments slug={post.slug} />
-          </div>
-          <div className="col-span-1 lg:col-span-4">
-            <div className="relative lg:sticky top-8">
-              <PostWidget slug={post.slug} categories={post.categories.map((category) => category.slug)} />
-              <Categories />
-            </div>
-          </div>
+      <div className="mx-auto flex flex-col max-w-7xl items-center  justify-between px-4 py-5 sm:px-6 sm:py-4 md:justify-start md:space-x-10 lg:px-0">
+        <div className="col-span-1 lg:col-span-10">
+          <PostDetail post={post} />
+          <Author author={post.author} />
+          <h1 className="pt-16 text-4xl font-black">Similar Articles</h1>
+          <AdjacentPosts slug={post.slug} createdAt={post.createdAt} />
+          <CommentsForm slug={post.slug} />
+          <Comments slug={post.slug} />
         </div>
       </div>
     </>

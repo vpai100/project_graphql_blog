@@ -1,31 +1,41 @@
-import React from 'react';
-import moment from 'moment';
-import Link from 'next/link';
+import React from "react";
+import moment from "moment";
+import Link from "next/link";
 
 const AdjacentPostCard = ({ post, position }) => (
-  <>
-    <div className="absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72" style={{ backgroundImage: `url('${post.featuredImage.url}')` }} />
-    <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-full h-72" />
-    <div className="flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full">
-      <p className="text-white text-shadow font-semibold text-xs">{moment(post.createdAt).format('MMM DD, YYYY')}</p>
-      <p className="text-white text-shadow font-semibold text-2xl text-center">{post.title}</p>
+  <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
+    <div className="flex-shrink-0">
+      <img
+        src={post.featuredImage.url}
+        alt=""
+        className="h-48 w-full object-cover"
+      />
     </div>
-    <Link href={`/post/${post.slug}`}><span className="z-10 cursor-pointer absolute w-full h-full" /></Link>
-    {position === 'LEFT' && (
-      <div className="absolute arrow-btn bottom-5 text-center py-3 cursor-pointer bg-pink-600 left-4 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
+    <div className="flex flex-1 flex-col justify-between bg-white p-6">
+      <div className="flex-1">
+        <h1 className="p-1 transition duration-700 text-left text-2xl font-black mb-8 cursor-pointer hover:text-violet-600">
+          <Link href={`/post/${post.slug}`}>{post.title}</Link>
+          <p className="mt-3 text-base font-semibold text-gray-500">
+            {post.excerpt}
+          </p>
+        </h1>
       </div>
-    )}
-    {position === 'RIGHT' && (
-      <div className="absolute arrow-btn bottom-5 text-center py-3 cursor-pointer bg-pink-600 right-4 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
+      <div className="flex items-center justify-between mb-4 lg:mb-0 w-full lg:w-auto mr-8 items-center">
+        <div className="text-center">
+          <Link href={`/post/${post.slug}`}>
+            <span className="transition duration-500 ease transform hover:-translate-y-1 inline-block bg-blue-700 text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">
+              Read Now
+            </span>
+          </Link>
+        </div>
+        <div className="font-medium text-gray-700">
+          <span className="align-middle">
+            {moment(post.createdAt).format("MMM DD, YYYY")}
+          </span>
+        </div>
       </div>
-    )}
-  </>
+    </div>
+  </div>
 );
 
 export default AdjacentPostCard;

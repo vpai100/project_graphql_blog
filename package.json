@@ -13,16 +13,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "^2.0.12",
+    "clsx": "^1.2.1",
     "graphql": "^15.6.1",
     "graphql-request": "^3.5.0",
     "html-react-parser": "^1.4.0",
     "moment": "^2.29.1",
-    "next": "11.1.2",
+    "next": "^12.3.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-multi-carousel": "^2.6.5",
     "sass": "^1.42.1",
-    "swr": "^1.0.1"
+    "swr": "^1.0.1",
+    "tailwindcss-classnames": "^3.0.6"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.6",
